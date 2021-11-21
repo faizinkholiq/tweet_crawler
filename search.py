@@ -1,0 +1,27 @@
+import tweepy
+import csv
+import pandas as pd
+
+from dotenv import load_dotenv
+load_dotenv()
+
+import os
+
+consumer_key = os.environ.get('CONSUMER_KEY')
+consumer_secret = os.environ.get('CONSUMER_SECRET')
+access_token = os.environ.get('ACCESS_TOKEN')
+access_token_secret = os.environ.get('ACCESS_TOKEN_SECRET')
+client = tweepy.Client(bearer_token=os.environ.get('BEARER_TOKEN'))
+
+auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
+auth.set_access_token(access_token, access_token_secret)
+
+api = tweepy.API(auth,wait_on_rate_limit=True)
+
+csvFile = open('oleoutfortheglory.csv', 'a')
+
+csvWriter = csv.writer(csvFile)
+
+for tweet in tweepy.Cursor(api.search_tweets, q="#oleout",lang="id").items(100):
+    print (tweet.created_at, tweet.text)
+    csvWriter.writerow([tweet.created_at, tweet.text.encode('utf-8')])
