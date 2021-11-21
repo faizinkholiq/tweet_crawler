@@ -18,7 +18,7 @@ auth.set_access_token(access_token, access_token_secret)
 
 api = tweepy.API(auth,wait_on_rate_limit=True)
 
-csvFile = open('oleoutfortheglory.csv', 'a')
+csvFile = open('dump/oleoutfortheglory.csv', 'a')
 
 csvWriter = csv.writer(csvFile)
 
