@@ -1,6 +1,5 @@
 import tweepy
 import csv
-import pandas as pd
 
 from dotenv import load_dotenv
 load_dotenv()
